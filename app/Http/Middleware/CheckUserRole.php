@@ -9,13 +9,19 @@ class CheckUserRole
 {
     public function handle(Request $request, Closure $next)
     {
-        /*
-        // Verifique se o usuário tem permissão para acessar a rota
-        if (!auth()->user()->isAdmin()) {
-            // Se não tiver permissão, redirecione ou retorne uma resposta adequada
-            return redirect('/home')->with('error', 'Você não tem permissão para acessar esta página.');
+        $isNotAllowed = false;
+        $role = auth()->user()->roles->role;
+        $url = url()->current();
+
+        foreach ($role->permissions as $permission) {
+            if (!empty($permission->excluded_routes) && str_contains($url, $permission->excluded_routes)) {
+                $isNotAllowed = true;
+            }
         }
-        */
+
+        if ($isNotAllowed) {
+            return redirect('/')->with('error', 'You do not have permission to access this page');
+        }
 
         return $next($request);
     }

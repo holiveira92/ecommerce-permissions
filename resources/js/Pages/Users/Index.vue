@@ -27,7 +27,7 @@
                             <td class="text-white px-4 py-2">{{ account.id }}</td>
                             <td class="text-white px-4 py-2">{{ account.name }}</td>
                             <td class="text-white px-4 py-2">{{ account.email }}</td>
-                            <td class="text-white px-4 py-2">{{ account.email }}</td>
+                            <td class="text-white px-4 py-2">{{ account.roles.role.name }}</td>
                             <td class="text-white px-4 py-2 space-x-4 text-center">
                                 <Link :href="route('users.edit', account.id)">
                                     <PrimaryButton>Edit</PrimaryButton>

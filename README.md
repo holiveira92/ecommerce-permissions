@@ -13,33 +13,33 @@
 
 ## Install
 
-1 - Rodar composer
+1 - Run composer
 ```sh
  composer install
 ```
 
-2 - Configurar .env
+2 - Configure .env
 ```sh
  Configurar infos do BD
 ```
 
-3 - Rodar migrations
+3 - Execute migrations
 ```sh
  php artisan migrate
 ```
 
-4 - Instalar chaves da aplicação com passport
-```sh
- php artisan passport:install
-```
 
-
-## Execução Local
+## Local Execution
 APP_PORT=80
 
 Laravel Sail
 ```sh
  sail up -d
+```
+
+Vite
+```sh
+ npm run dev
 ```
 
 ou 

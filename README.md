@@ -7,6 +7,8 @@
 * PHP 8.2
 * Laravel 10
 * Mysql 8
+* Node 20
+* VueJS 3
 
 
 ## Install

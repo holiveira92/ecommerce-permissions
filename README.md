@@ -20,7 +20,7 @@
 
 2 - Configure .env
 ```sh
- Configurar infos do BD
+ configure database access
 ```
 
 3 - Execute migrations

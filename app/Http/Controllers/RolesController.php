@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use Inertia\Inertia;
 use App\Models\Permission;
-use Illuminate\Http\Request;
 use App\Services\RoleService;
 use App\Http\Requests\Role\StoreRequest;
 use App\Http\Requests\Role\UpdateRequest;
@@ -37,6 +36,7 @@ class RolesController extends Controller
     public function create()
     {
         $permissions = Permission::all()->toArray();
+
         return Inertia::render('Roles/Create', compact('permissions'));
     }
 
@@ -54,11 +54,12 @@ class RolesController extends Controller
 
             // Sending email
             Notification::route('mail', 'test@test.com')->notify(new NewRoleNotification($role));
+
         } catch (\Throwable $th) {
             throw $th;
         }
 
-        return redirect()->route('roles.index')->with('success', 'User account created successfully.');
+        return redirect()->route('roles.index')->with('success', 'Role created successfully.');
     }
 
     /**
@@ -67,7 +68,9 @@ class RolesController extends Controller
     public function edit(Role $role)
     {
         $permissions = Permission::all()->toArray();
+
         $rolePermissions = $role->permissions->toArray();
+
         return Inertia::render('Roles/Edit', compact('role', 'rolePermissions', 'permissions'));
     }
 
@@ -96,6 +99,7 @@ class RolesController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
+
         return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
     }
 }

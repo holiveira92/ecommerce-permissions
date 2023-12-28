@@ -5,16 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Account\StoreRequest;
 use App\Http\Requests\Account\UpdateRequest;
-use Illuminate\Support\Facades\Notification;
-use App\Http\Requests\Account\DestroyRequest;
-use App\Notifications\NewAccountNotification;
+use App\Providers\RouteServiceProvider;
 
 class UsersController extends Controller
 {
@@ -27,9 +22,8 @@ class UsersController extends Controller
 
     public function index()
     {
-        $accounts = User::all();
         return Inertia::render('Users/Index', [
-            'accounts' => $accounts
+            'accounts' => User::all()
         ]);
     }
 
@@ -42,26 +36,14 @@ class UsersController extends Controller
 
     public function store(StoreRequest $request)
     {
-        //try {
-            /*
-            $data = $request->validated();
+        try {
+            $this->userService->create($request->validated());
 
-            $user = User::create($data);
+            return redirect()->route('users.index')->with('success', 'User account created successfully.');
 
-            Auth::login($user);
-
-            // Sending email
-            Notification::route('mail', 'test@test.com')->notify(new NewAccountNotification($user));
-            */
-            $user = $this->userService->create($request->validated());
-
-            /*
         } catch (\Throwable $th) {
             throw $th;
         }
-        */
-
-        return redirect()->route('users.index')->with('success', 'User account created successfully.');
     }
 
     public function edit(User $user)

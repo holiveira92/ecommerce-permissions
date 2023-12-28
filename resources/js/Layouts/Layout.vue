@@ -37,7 +37,7 @@ const showingNavigationDropdown = ref(false);
                                     Roles
                                 </NavLink>
 
-                                <NavLink :href="route('users.index')" :active="route().current('users.index')">
+                                <NavLink :href="route('permissions.index')" :active="route().current('permissions.index')">
                                     Permissions
                                 </NavLink>
                             </div>

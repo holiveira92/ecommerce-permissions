@@ -30,14 +30,14 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'check.user.role'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-// keep in auth middleware
-Route::resource('users', Controllers\UsersController::class);
-Route::resource('roles', Controllers\RolesController::class);
+    Route::resource('/users', Controllers\UsersController::class);
+    Route::resource('/roles', Controllers\RolesController::class);
+    Route::resource('/permissions', Controllers\PermissionsController::class);
+});
 
 require __DIR__.'/auth.php';

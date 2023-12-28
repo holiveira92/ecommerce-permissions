@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Permission::create(
+        Permission::insert([
             [
                 'name' => "Full Access",
                 'excluded_routes' => null,
@@ -33,7 +33,7 @@ return new class extends Migration
                 'name' => "Cannot See Checkout",
                 'excluded_routes' => "checkout",
             ],
-        );
+        ]);
     }
 
     /**

@@ -14,8 +14,16 @@ class CheckUserRole
         $url = url()->current();
 
         foreach ($role->permissions as $permission) {
-            if (!empty($permission->excluded_routes) && str_contains($url, $permission->excluded_routes)) {
-                $isNotAllowed = true;
+
+            if (empty($permission->excluded_routes)) {
+                continue;
+            }
+
+            $excludedItems = explode(",", $permission->excluded_routes);
+            foreach($excludedItems as $item) {
+                if (str_contains($url, $item)) {
+                    $isNotAllowed = true;
+                }
             }
         }
 

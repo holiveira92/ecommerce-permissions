@@ -19,7 +19,7 @@ return new class extends Migration
             ],
             [
                 'name' => "Cannot See SuperAdmin Routes",
-                'excluded_routes' => "users, roles, permissions",
+                'excluded_routes' => "users,roles,permissions",
             ],
             [
                 'name' => "Cannot See Flight Products",
@@ -27,11 +27,11 @@ return new class extends Migration
             ],
             [
                 'name' => "Cannot See Rent Car Products",
-                'excluded_routes' => "rent, car",
+                'excluded_routes' => "rent,car",
             ],
             [
                 'name' => "Cannot See Checkout",
-                'excluded_routes' => "checkout",
+                'excluded_routes' => "users,roles,permissions,checkout",
             ],
         ]);
     }

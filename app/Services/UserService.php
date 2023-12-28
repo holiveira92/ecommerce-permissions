@@ -2,13 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
-use App\Models\Permission;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\NewAccountNotification;
 
 class UserService
 {
@@ -18,9 +14,6 @@ class UserService
         $user = User::create($userData);
 
         Auth::login($user);
-
-        // Sending email
-        Notification::route('mail', 'test@test.com')->notify(new NewAccountNotification($user));
 
         $this->syncRoles($user->id, $userData['role_id']);
 

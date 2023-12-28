@@ -52,9 +52,6 @@ class RolesController extends Controller
 
             $role = $this->roleService->create($roleData, $permissionsIds);
 
-            // Sending email
-            Notification::route('mail', 'test@test.com')->notify(new NewRoleNotification($role));
-
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class CheckUserRole
 {
@@ -28,7 +30,12 @@ class CheckUserRole
         }
 
         if ($isNotAllowed) {
-            return redirect('/')->with('error', 'You do not have permission to access this page');
+            Auth::logout();
+
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return Redirect::to('/login');
         }
 
         return $next($request);
